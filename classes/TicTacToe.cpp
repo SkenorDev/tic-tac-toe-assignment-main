@@ -121,6 +121,9 @@ void TicTacToe::stopGame()
 {
     // clear out the board
     // loop through the 3x3 array and call destroyBit on each square
+
+    //destroy owner at each part of the board
+
         for(int i=0;i<3;i++){
         for(int f=0;f<3;f++){
         _grid[i][f].destroyBit();
@@ -138,6 +141,9 @@ Player* TicTacToe::ownerAt(int index ) const
     // x = index % 3 
     // if there is no bit at that location (in _grid) return nullptr
     // otherwise return the owner of the bit at that location using getOwner()
+
+    // return null or the owner at a given point if it isnt null
+
     if(_grid[index % 3][index / 3].bit()!=NULL) {
             return _grid[index % 3][index / 3].bit()->getOwner();
        }
@@ -162,6 +168,8 @@ Player* TicTacToe::checkForWinner()
     // if there is no bit in that square, it returns nullptr
     // if you find a winning triple, return the player who owns that triple
     // otherwise return nullptr
+
+    //set of winners
 int winners[8][3] = {
     {0, 1, 2},
     {3, 4, 5},
@@ -174,6 +182,7 @@ int winners[8][3] = {
 };
 std::string state = stateString();
 for(int i=0;i<8;i++){
+    // if board matches winner pattern return winner
     if(state[winners[i][0]]=='1'&&state[winners[i][1]]=='1'&&state[winners[i][2]]=='1'){
         return getPlayerAt(0);
     }
@@ -225,6 +234,9 @@ std::string TicTacToe::stateString() const
     // remember that player numbers are zero-based, so add 1 to get '1' or '2'
     // if the bit is null, add '0' to the string
     // finally, return the constructed string
+
+    //iteriate through string and set to player number + 1
+
     std::string state = "000000000";
     int it=0;
     for(int i=0;i<3;i++){
@@ -267,6 +279,7 @@ void TicTacToe::setStateString(const std::string &s)
     for(int i=0;i<9;i++){
         _grid[i % 3][i / 3].bit()->setOwner(getPlayerAt(s[i]));
     }
+    // iteriate through string and set board to affiliated character
 }
 
 
@@ -274,6 +287,7 @@ void TicTacToe::setStateString(const std::string &s)
 // this is the function that will be called by the AI
 //
  bool aiBoardFull(const std::string& state){
+    // if theres no 0 board is full
     return state.find('0') == std::string::npos;
  }
  int aiWinner(const std::string& state){
