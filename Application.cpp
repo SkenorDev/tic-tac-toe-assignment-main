@@ -95,7 +95,10 @@ void logInfo(std::string message) {
                 ImGui::Text("Current Player Number: %d", game->getCurrentPlayer()->playerNumber());
                 ImGui::Text("Current Board State: %s", game->stateString().c_str());
                 if (ImGui::Button("Enable Ai")){
+                    // game->_gameOptions.AIPlaying = true;
                 game->setAIPlayer(1);
+                //game->getCurrentPlayer()->setAIPlayer(true);
+
             }
                 if (gameOver) {
                     ImGui::Text("Game Over!");
