@@ -321,11 +321,13 @@ void TicTacToe::updateAI()
     std::string state = stateString();
     for (int i=0;i<9;i++){
         if (state[i]=='0'){
-            auto holder = &_grid[i%3][i/3];
+            auto holder = &_grid[i/3][i%3];
         actionForEmptyHolder(holder);
          endTurn();
+         break;
         }
     }
+
 }
 
 int TicTacToe::negamax(std::string& state, int depth, int playerColor){
